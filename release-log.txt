@@ -1,0 +1,2 @@
+
+- #37: chore: improve repository template setup workflow   (by @k-alphonse)
