@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -a
+
+PROJECT_HOME="${PROJECT_HOME:-/template-repository}"
+
+if [ -f "${PROJECT_HOME}/environments/development.env" ]; then
+    # shellcheck source=/dev/null
+    . "${PROJECT_HOME}/environments/development.env"
+fi
+
+set +a

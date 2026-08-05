@@ -1,0 +1,21 @@
+---
+name: Continuous-Integration
+
+on:
+  pull_request:
+    types:
+      - auto_merge_enabled
+    branches:
+      - staging
+  merge_group:
+
+permissions:
+  contents: read
+  checks: read
+
+jobs:
+  ci-tasks:
+    uses: ec-intl/workflow-templates/.github/workflows/ci_template.yml@v1
+    with:
+      runner-name: 'za-3'
+    secrets: inherit

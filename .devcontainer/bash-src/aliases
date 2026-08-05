@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+alias cdrepo='cd "${PROJECT_HOME:-/template-repository}"'
