@@ -20,7 +20,7 @@ jobs:
   deployment-tasks:
     uses: ec-intl/workflow-templates/.github/workflows/cd_template.yml@v1
     with:
-      other-files: "notebooks,src,environments,scripts"
+      other-files: "Project.toml,Manifest.toml,src,test"
     secrets: inherit
 
   release-tasks:

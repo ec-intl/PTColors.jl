@@ -2,7 +2,7 @@
 
 set -a
 
-PROJECT_HOME="${PROJECT_HOME:-/template-repository}"
+PROJECT_HOME="${PROJECT_HOME:-/ptcolors.jl}"
 
 if [ -f "${PROJECT_HOME}/environments/development.env" ]; then
     # shellcheck source=/dev/null

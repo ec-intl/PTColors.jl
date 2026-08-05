@@ -1,19 +1,13 @@
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.11.0"
 manifest_format = "2.0"
-project_hash = "61265fe89f18816fa75dae8badcd4c53727737b3"
+project_hash = "97fd8b362805a2f123534a8b320ebcf5228bc74e"
 
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 version = "1.11.0"
-
-[[deps.PTColors]]
-deps = ["Dates"]
-path = "."
-uuid = "f54230f2-59b2-4302-b09c-f9f04c8b5500"
-version = "0.1.0"
 
 [[deps.Printf]]
 deps = ["Unicode"]

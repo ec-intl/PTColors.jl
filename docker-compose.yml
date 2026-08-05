@@ -21,7 +21,7 @@ services:
         - USERNAME=eci-user
     <<: *testing-common
     volumes:
-      - .:/template-repository
+      - .:/ptcolors.jl
     profiles:
       - testing
 
@@ -69,6 +69,6 @@ services:
       - environments/development.env
     volumes:
       - ~/.ssh:/home/eci-user/.ssh:ro
-      - .:/template-repository
+      - .:/ptcolors.jl
     profiles:
       - developing

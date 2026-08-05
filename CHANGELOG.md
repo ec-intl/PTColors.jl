@@ -1,12 +1,12 @@
-# Changelog for the Template Repository Repository
-## v1.0.6
-**🔨 Chores**
-- #34:  standardizes repository   (by @cmbengue-ec-intl)
+# Changelog for PTColors.jl
 
-## v1.0.5
-### ✅ CI
-Update Dockerfile and CI configurations   (by @cmbengue-ec-intl)
+All notable changes to this project will be documented in this file.
 
-### 🚢 Release
-Template Repository v1.0.5   (by @cmbengue-ec-intl)
+## Unreleased
 
+### Added
+
+- Created PTColors as a standalone Julia package.
+- Added package tests and continuous-integration checks.
+- Added Documenter.jl documentation.
+- Added Julia-compatible Docker development and testing environments.

@@ -13,8 +13,12 @@ DocMeta.setdocmeta!(
 makedocs(
     doctest = true,
     checkdocs = :exports,
-    format = Documenter.HTML(),
+    format = Documenter.HTML(
+        edit_link = nothing,
+        repolink = "https://github.com/ec-intl/ptcolors.jl",
+    ),
     modules = [PTColors],
+    remotes = nothing,
     pages = [
         "Home" => "index.md",
         "API Reference" => "api.md",
