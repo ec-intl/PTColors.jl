@@ -31,7 +31,11 @@ RUN mkdir -p /tmp "${WKDIR}" && \
 ARG TARGETARCH
 ARG JULIA_VERSION=1.11.0
 RUN set -eux; \
-    case "${TARGETARCH}" in \
+    arch="${TARGETARCH:-}"; \
+    if [ -z "${arch}" ]; then \
+        arch="$(dpkg --print-architecture)"; \
+    fi; \
+    case "${arch}" in \
         amd64) \
             JULIA_ARCH="x86_64"; \
             JULIA_PATH="x64"; \
@@ -43,7 +47,7 @@ RUN set -eux; \
             JULIA_SHA256="66b9195b4c6b85403834dca9ef4fcae75f15be906bb3bb2c48eccb780ab810a1" \
             ;; \
         *) \
-            echo "Unsupported architecture: ${TARGETARCH}"; \
+            echo "Unsupported architecture: ${arch}"; \
             exit 1 \
             ;; \
     esac; \

@@ -8,7 +8,7 @@ function capture_output(f)
     return String(take!(io))
 end
 
-println("\nUnittesting PTColors.jl with in ", get(ENV, "PWD", ""), " with Julia ", VERSION, " on ", Sys.KERNEL,"\n")
+println("\nUnittesting PTColors.jl in ", get(ENV, "PWD", ""), " with Julia ", VERSION, " on ", Sys.KERNEL,"\n")
 
 @testset "PTColors" begin
     @testset "message formatting" begin
