@@ -1,0 +1,28 @@
+---
+name: Continuous-Deployment
+
+env:
+  TMPDIR: "/tmp/deployment"
+
+permissions:
+  contents: write
+  checks: write
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deployment-tasks:
+    uses: ec-intl/workflow-templates/.github/workflows/cd_template.yml@v1
+    with:
+      other-files: "notebooks,src,environments"
+    secrets: inherit
+
+  release-tasks:
+    uses: ec-intl/workflow-templates/.github/workflows/make-release_template.yml@v1
+    secrets: inherit

@@ -1,0 +1,22 @@
+---
+name: Docs
+
+on:
+  pull_request:
+    types:
+      - auto_merge_enabled
+    branches:
+      - staging
+  merge_group:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  checks: read
+
+jobs:
+  docs-tasks:
+    uses: ec-intl/workflow-templates/.github/workflows/docs_template.yml@v1
+    secrets: inherit

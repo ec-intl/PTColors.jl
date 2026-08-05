@@ -1,0 +1,74 @@
+---
+x-linting-common: &linting-common
+  environment:
+    - RUN_LOCAL=true
+    - USE_FIND_ALGORITHM=true
+    - VALIDATE_ALL_CODEBASE=true
+    - FILTER_REGEX_EXCLUDE=.*/\.mypy_cache/.*
+x-testing-common: &testing-common
+  command:
+    - "/bin/bash"
+    - "-c"
+    - ". ./scripts/ci/run-ci.sh"
+  env_file:
+    - environments/testing.env
+services:
+  testing:
+    build:
+      context: .
+      target: testing
+      args:
+        - USERNAME=eci-user
+    <<: *testing-common
+    volumes:
+      - ~/md-src/template-repository:/template-repository
+    profiles:
+      - testing
+
+  ci-testing:
+    build:
+      context: .
+      target: ci-testing
+      args:
+        - USERNAME=eci-user
+    <<: *testing-common
+    profiles:
+      - ci-testing
+
+  linting:
+    image: github/super-linter:v5
+    <<: *linting-common
+    volumes:
+      - ~/md-src/template-repository:/tmp/lint
+    profiles:
+      - linting
+
+  ci-linting:
+    build:
+      context: .
+      target: ci-linting
+      args:
+        - USERNAME=eci-user
+    <<: *linting-common
+    profiles:
+      - ci-linting
+
+  developing:
+    build:
+      context: .
+      args:
+        - USERNAME=${USER}
+    command:
+      - "/bin/bash"
+      - "-c"
+      - "\
+          . /tmp/install &&  \
+          nohup /tmp/.sleeping_daemon \
+        "
+    env_file:
+      - environments/development.env
+    volumes:
+      - ~/.ssh:/home/${USER}/.ssh:ro
+      - ~/md-src/template-repository:/home/${USER}/template-repository
+    profiles:
+      - developing
