@@ -72,6 +72,9 @@ instance/
 # Sphinx documentation
 docs/_build/
 
+# Julia documentation
+build_docs/build/
+
 # PyBuilder
 .pybuilder/
 target/

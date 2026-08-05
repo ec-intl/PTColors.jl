@@ -19,4 +19,7 @@ permissions:
 jobs:
   docs-tasks:
     uses: ec-intl/workflow-templates/.github/workflows/docs_template.yml@v1
+    with:
+      doc-type: 'documenter.jl'
+      julia-version: '1.11'
     secrets: inherit
