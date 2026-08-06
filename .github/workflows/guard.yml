@@ -13,6 +13,29 @@ permissions:
   contents: read
 
 jobs:
-  guardian-jobs:
-    uses: ec-intl/workflow-templates/.github/workflows/guard_template.yml@v1
-    secrets: inherit
+  branch-check:
+    runs-on: ubuntu-latest
+
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]') }}
+
+    steps:
+      - name: Preamble
+        run: |
+          echo "🎉 A ${{ github.event_name }} triggered a ${{ runner.os }} job."
+          echo "🔎 The branch is ${{ github.ref_name }} in ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v6
+
+      - name: Guard the main branch
+        if: ${{ github.event_name == 'pull_request' && github.head_ref != 'staging' }}
+        run: |
+          echo "🚫 The main branch is protected."
+          echo "🚫 Pull requests to main must come from staging."
+          exit 1
+
+      - name: Notify
+        run: |
+          echo "📣 The job has been completed."
+          echo "🔔 The main branch is protected."
+          echo "🍏 This job's status is ${{ job.status }}."

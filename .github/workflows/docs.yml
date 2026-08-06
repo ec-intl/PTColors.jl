@@ -16,10 +16,76 @@ permissions:
   contents: write
   checks: read
 
+env:
+  JULIA_VERSION: '1.11'
+
 jobs:
-  docs-tasks:
-    uses: ec-intl/workflow-templates/.github/workflows/docs_template.yml@v1
-    with:
-      doc-type: 'documenter.jl'
-      julia-version: '1.11'
-    secrets: inherit
+  build-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Preamble
+        run: |
+          echo "🎉 A ${{ github.event_name }} triggered a ${{ runner.os }} job."
+          echo "🔎 The branch is ${{ github.ref_name }} in ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v6
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v3
+        with:
+          version: ${{ env.JULIA_VERSION }}
+
+      - name: Cache Julia packages
+        uses: julia-actions/cache@v3
+        with:
+          cache-name: 'julia-cache;workflow=${{ github.workflow }};job=${{ github.job }};version=${{ env.JULIA_VERSION }}'
+          delete-old-caches: 'false'
+          save-always: 'true'
+
+      - name: Install documentation dependencies
+        run: |
+          julia --project=build_docs \
+            -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+
+      - name: Build documentation
+        run: |
+          julia --project=build_docs build_docs/make.jl
+
+      - name: Stage documentation for deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          rm -rf /tmp/ptcolors-jl-docs
+          mkdir -p /tmp/ptcolors-jl-docs
+          cp -R build_docs/build/. /tmp/ptcolors-jl-docs/
+
+      - name: Check out GitHub Pages branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Deploy documentation to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        working-directory: gh-pages
+        run: |
+          rm -rf docs
+          mkdir -p docs
+          cp -R /tmp/ptcolors-jl-docs/. docs/
+          touch docs/.nojekyll
+          date -u > timestamp.txt
+
+          git config user.name "eci-robot"
+          git config user.email "info@ec-intl.com"
+
+          git add docs timestamp.txt
+
+          if git diff --cached --quiet; then
+            echo "No documentation changes to deploy."
+          else
+            git commit -m "docs: update generated documentation"
+            git push origin HEAD:gh-pages
+          fi
