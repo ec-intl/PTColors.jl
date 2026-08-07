@@ -11,11 +11,10 @@ The package provides information, success, warning, failure, and header messages
 
 | Workflow                  | Status |
 | ------------------------- | ------ |
-|  Testing Suite          | [![Continuous Integration](https://github.com/ec-intl/ptcolors.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/ec-intl/ptcolors.jl/actions/workflows/ci.yml) |
-|  Deployment Suite       | [![Continuous Deployment](https://github.com/ec-intl/ptcolors.jl/actions/workflows/cd.yml/badge.svg)](https://github.com/ec-intl/ptcolors.jl/actions/workflows/cd.yml) |
-|  Documentation          | [![Documentation](https://github.com/ec-intl/ptcolors.jl/actions/workflows/docs.yml/badge.svg)](https://github.com/ec-intl/ptcolors.jl/actions/workflows/docs.yml) |
-|  Guard Main Branch     | [![Guard Main Branch](https://github.com/ec-intl/ptcolors.jl/actions/workflows/guard.yml/badge.svg)](https://github.com/ec-intl/ptcolors.jl/actions/workflows/guard.yml) |
-|  Code Quality Checker   | [![Lint Code Base](https://github.com/ec-intl/ptcolors.jl/actions/workflows/super-linter.yml/badge.svg)](https://github.com/ec-intl/ptcolors.jl/actions/workflows/super-linter.yml) |
+|  Testing Suite          | [![Continuous Integration](https://github.com/ec-intl/PTColors.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/ci.yml) |
+|  Documentation          | [![Documentation](https://github.com/ec-intl/PTColors.jl/actions/workflows/docs.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/docs.yml) |
+|  Guard Main Branch     | [![Guard Main Branch](https://github.com/ec-intl/PTColors.jl/actions/workflows/guard.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/guard.yml) |
+|  Code Quality Checker   | [![Lint Code Base](https://github.com/ec-intl/PTColors.jl/actions/workflows/super-linter.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/super-linter.yml) |
 
 ## 📋 Requirements
 
@@ -27,7 +26,7 @@ While the package is under development, install it from the `staging` branch:
 
 ```julia
 using Pkg
-Pkg.add(url = "https://github.com/ec-intl/ptcolors.jl", rev = "staging")
+Pkg.add(url = "https://github.com/ec-intl/PTColors.jl", rev = "staging")
 ```
 
 After the package is registered in Julia’s General registry, install it by name:

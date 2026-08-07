@@ -17,7 +17,7 @@ makedocs(
         assets = ["assets/custom.css"],
         edit_link = nothing,
         footer = "PTColors.jl is developed by [Elizabeth Consulting International Inc.](https://github.com/ec-intl).",
-        repolink = "https://github.com/ec-intl/ptcolors.jl",
+        repolink = "https://github.com/ec-intl/PTColors.jl",
     ),
     modules = [PTColors],
     remotes = nothing,
