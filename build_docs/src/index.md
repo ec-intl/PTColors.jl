@@ -35,13 +35,9 @@ PTColors makes terminal messages easier to identify without requiring users to w
 
 ## Installation
 
-<!-- markdownlint-disable MD046 -->
-
-!!! note "Development installation"
-
-    Until PTColors is registered in Julia’s General registry, install it directly from the repository’s `staging` branch.
-
-<!-- markdownlint-enable MD046 -->
+> **ℹ️ Development installation**
+>
+> Until PTColors is registered in Julia’s General registry, install it directly from the repository’s `staging` branch.
 
 ```julia
 using Pkg
@@ -90,7 +86,7 @@ Each message includes a timestamp, status label, and corresponding terminal colo
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="https://ecisite.s3.amazonaws.com/static/img/ptcolors/example1.jpeg"
+        src="assets/ptcolors-julia-example.png"
         alt="Example PTColors terminal output"
         loading="lazy"
     >
@@ -153,14 +149,10 @@ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
 
 ## Learn more
 
-<!-- markdownlint-disable MD046 -->
+> **💡 Explore the package**
+>
+> Review the [API Reference](@ref) for the complete exported interface, or visit the [PTColors.jl GitHub repository](https://github.com/ec-intl/ptcolors.jl) for source code, issues, and development information.
 
-!!! tip "Explore the package"
-
-    Review the [API Reference](@ref) for the complete exported interface, or visit the [PTColors.jl GitHub repository](https://github.com/ec-intl/ptcolors.jl) for source code, issues, and development information.
-
-<!-- markdownlint-enable MD046 -->
-
-## Licence
+## License
 
 PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/ptcolors.jl/blob/staging/LICENSE).
