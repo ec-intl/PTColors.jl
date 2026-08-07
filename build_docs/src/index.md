@@ -139,6 +139,17 @@ The function returns:
 
 Unexpected exceptions are rethrown so they are not silently hidden.
 
+```@raw html
+<div class="ptcolors-example">
+    <img
+        src="assets/ptcolors-julia-callback-example.png"
+        alt="PTColors callback terminal output"
+        loading="lazy"
+    >
+    <p>Successful callback execution reported by PTColors.</p>
+</div>
+```
+
 ## Testing
 
 Run the complete package test suite from the repository root:

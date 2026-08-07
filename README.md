@@ -113,10 +113,12 @@ The package also provides convenience macros:
 The `messages` function prints an information message, runs a callback, and then prints either a success or failure message.
 
 ```julia
+# Define the callback that PTColors will run.
 function foo(bar)
-    println(bar)
+    println("Processing: ", bar)
 end
 
+# Run the callback with start, success, and failure messages.
 status = messages(
     "Running the foo function...",
     "foo function complete.",
@@ -126,12 +128,17 @@ status = messages(
     exception = Exception,
 )
 
+# Interpret the status returned by messages.
 if status == 0
     println("Hooray!")
 else
     println("Oh no!")
 end
 ```
+
+This produces terminal output similar to the following:
+
+![Callback terminal output](build_docs/src/assets/ptcolors-julia-callback-example.png)
 
 The function returns `0` when the callback succeeds and `1` when it throws an expected exception. Unexpected exceptions are rethrown.
 
