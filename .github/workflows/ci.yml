@@ -15,7 +15,27 @@ permissions:
 
 jobs:
   ci-tasks:
-    uses: ec-intl/workflow-templates/.github/workflows/ci_template.yml@v1
-    with:
-      runner-name: 'za-3'
-    secrets: inherit
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Preamble
+        run: |
+          echo "🎉 A ${{ github.event_name }} triggered a ${{ runner.os }} job."
+          echo "🔎 The branch is ${{ github.ref_name }} in ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v7
+
+      - name: Run PTColors tests in Docker
+        run: |
+          docker compose --profile ci-testing up \
+            --build \
+            --exit-code-from ci-testing
+
+      - name: Clean up Docker resources
+        if: always()
+        run: |
+          docker compose --profile ci-testing down \
+            --volumes \
+            --remove-orphans
