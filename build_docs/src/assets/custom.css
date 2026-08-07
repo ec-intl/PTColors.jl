@@ -13,8 +13,8 @@
     border-radius: 0.5rem;
     background: linear-gradient(
         135deg,
-        rgba(149, 88, 178, 0.12),
-        rgba(64, 99, 216, 0.08)
+        rgb(149 88 178 / 12%),
+        rgb(64 99 216 / 8%)
     );
 }
 
@@ -53,9 +53,9 @@
 .ptcolors-example img {
     width: 100%;
     max-width: 760px;
-    border: 1px solid rgba(128, 128, 128, 0.25);
+    border: 1px solid rgb(128 128 128 / 25%);
     border-radius: 0.65rem;
-    box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.14);
+    box-shadow: 0 0.6rem 1.8rem rgb(0 0 0 / 14%);
 }
 
 .ptcolors-example p {
@@ -64,14 +64,16 @@
     font-size: 0.9rem;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 html.theme--documenter-dark .ptcolors-hero {
     background: linear-gradient(
         135deg,
-        rgba(149, 88, 178, 0.22),
-        rgba(64, 99, 216, 0.16)
+        rgb(149 88 178 / 22%),
+        rgb(64 99 216 / 16%)
     );
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 html.theme--documenter-dark .ptcolors-example p {
     color: #bbb;
 }

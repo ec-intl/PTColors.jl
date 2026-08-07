@@ -35,9 +35,13 @@ PTColors makes terminal messages easier to identify without requiring users to w
 
 ## Installation
 
+<!-- markdownlint-disable MD046 -->
+
 !!! note "Development installation"
 
     Until PTColors is registered in Julia’s General registry, install it directly from the repository’s `staging` branch.
+
+<!-- markdownlint-enable MD046 -->
 
 ```julia
 using Pkg
@@ -149,9 +153,13 @@ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
 
 ## Learn more
 
+<!-- markdownlint-disable MD046 -->
+
 !!! tip "Explore the package"
 
     Review the [API Reference](@ref) for the complete exported interface, or visit the [PTColors.jl GitHub repository](https://github.com/ec-intl/ptcolors.jl) for source code, issues, and development information.
+
+<!-- markdownlint-enable MD046 -->
 
 ## Licence
 
