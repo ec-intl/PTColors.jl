@@ -74,14 +74,19 @@ failmsg("The operation failed.")
 
 Each message includes a timestamp, status label, and corresponding terminal color.
 
-| Function | Label | Color | Typical use |
+| Function | Label | ANSI color | Typical use |
 |---|---|---|---|
-| `headermsg` | `NOTICE` | Magenta | Section headings and important notices |
-| `infomsg` | `INFORMATION` | Blue | General progress information |
-| `okmsg` | `SUCCESS` | Green | Successful operations |
-| `warnmsg` | `WARNING` | Yellow | Recoverable problems or cautions |
-| `failmsg` | `FAILURE` | Red | Errors and failed operations |
+| `headermsg` | `NOTICE` | Bright magenta | Section headings and important notices |
+| `infomsg` | `INFORMATION` | Bright blue | General progress information |
+| `okmsg` | `SUCCESS` | Bright green | Successful operations |
+| `warnmsg` | `WARNING` | Bright yellow | Recoverable problems or cautions |
+| `failmsg` | `FAILURE` | Bright red | Errors and failed operations |
 | `defaultmsg` | `NOTICE` | Uncolored by default | Custom or general messages |
+
+> **Terminal colors:** PTColors uses standard ANSI color categories rather than
+> fixed RGB values. The exact shades depend on the terminal emulator and its
+> active color theme. This example was captured in the VS Code terminal using
+> the Monokai theme.
 
 ```@raw html
 <div class="ptcolors-example">

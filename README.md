@@ -97,6 +97,11 @@ infomsg("This is an information message.")
 
 This produces timestamped terminal messages with a color and label appropriate to each message type.
 
+> **Terminal colors:** PTColors uses standard ANSI color categories rather than
+> fixed RGB values. The exact shades depend on the terminal emulator and its
+> active color theme. This example was captured in the VS Code terminal using
+> the Monokai theme.
+
 ![Example terminal output](build_docs/src/assets/ptcolors-julia-example.png)
 
 The package also provides convenience macros:
