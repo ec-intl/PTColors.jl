@@ -1,114 +1,180 @@
-# ✨ Welcome to ECI's GitHub Repository Template! ✨
+# 🎨 PTColors.jl
 
-🚀 Ready to launch your next stellar project? You've landed on the right launchpad! This repository is your ultimate starter kit for blasting off a new company GitHub repository.
+[![Julia 1.11+](https://img.shields.io/badge/Julia-1.11%2B-9558B2?logo=julia)](https://julialang.org)
+[![Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-4063D8)](LICENSE)
 
-## Important Considerations
+`PTColors` is a lightweight Julia package designed to add color-coded, timestamped messages to terminal output with minimal effort. It is useful for command-line applications, scripts, simulations, and other projects that need readable status messages.
 
-For the best experience, please follow these guidelines:
+The package provides information, success, warning, failure, and header messages without requiring users to work directly with ANSI escape codes. It also includes convenience macros and callback handling for common application workflows.
 
-### Required Branches on GitHub
+## 🚦 Project Status
 
-- `main` - The main branch for the repository.
-- `staging` - The staging branch for the repository.
-- `production` - The production branch for the repository.
-- `release` - The release branch for the repository.
-- `gh-pages` - The GitHub Pages branch for the repository.
+| Workflow                  | Status |
+| ------------------------- | ------ |
+|  Testing Suite          | [![Continuous Integration](https://github.com/ec-intl/PTColors.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/ci.yml) |
+|  Documentation          | [![Documentation](https://github.com/ec-intl/PTColors.jl/actions/workflows/docs.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/docs.yml) |
+|  Guard Main Branch     | [![Guard Main Branch](https://github.com/ec-intl/PTColors.jl/actions/workflows/guard.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/guard.yml) |
+|  Code Quality Checker   | [![Lint Code Base](https://github.com/ec-intl/PTColors.jl/actions/workflows/super-linter.yml/badge.svg)](https://github.com/ec-intl/PTColors.jl/actions/workflows/super-linter.yml) |
 
-### Minimum Directory Structure
+## 📋 Requirements
 
-The following directory structure is required for the template to work correctly.
+- Julia 1.11 or later
 
-```plaintext
-|--- .github/
-      |--- workflows/
-           |--- ci.yml
-           |--- cd.yml
-           |--- docs.yml
-           |--- guard.yml
-           |--- release-log.yml
-           |--- super-linter.yml
-|--- LICENSE  # ECI Proprietary License file / Apache 2.0
-|--- README.md
+## 📦 Installation
+
+While the package is under development, install it from the `staging` branch:
+
+```julia
+using Pkg
+Pkg.add(url = "https://github.com/ec-intl/PTColors.jl", rev = "staging")
 ```
 
-## Status
+After the package is registered in Julia’s General registry, install it by name:
 
-| Workflow | Status |
-|----------|--------|
-| **Continuous Integration** | [![Continuous-Integration](https://github.com/ec-intl/workflow-templates/actions/workflows/ci.yml/badge.svg)](https://github.com/ec-intl/workflow-templates/actions/workflows/ci.yml) |
-| **Continuous Deployment** | [![Continuous Deployment](https://github.com/ec-intl/workflow-templates/actions/workflows/cd.yml/badge.svg)](https://github.com/ec-intl/workflow-templates/actions/workflows/cd.yml) |
-| **Documentation Status** | [![Documentation](https://github.com/ec-intl/workflow-templates/actions/workflows/docs.yml/badge.svg)](https://github.com/ec-intl/workflow-templates/actions/workflows/docs.yml) |
-| **Guard Main Branch** | [![Guard Main](https://github.com/ec-intl/workflow-templates/actions/workflows/guard.yml/badge.svg)](https://github.com/ec-intl/workflow-templates/actions/workflows/guard.yml) |
-| **Code Standards Checks** | [![Lint Codebase](https://github.com/ec-intl/workflow-templates/actions/workflows/super-linter.yml/badge.svg)](https://github.com/ec-intl/workflow-templates/actions/workflows/super-linter.yml) |
-| **Release Logging** | [![Release Log](https://github.com/ec-intl/workflow-templates/actions/workflows/release-log.yml/badge.svg)](https://github.com/ec-intl/workflow-templates/actions/workflows/release-log.yml) |
+```julia
+using Pkg
+Pkg.add("PTColors")
+```
 
-## Why Use This Template?
+## 🧩 Components
 
-- **Ignite Your Engines:** Accelerate your projects with pre-configured settings, branching strategies, and essential files.
-- **Mission Control:** Standardized structure makes it easier for your team to collaborate and navigate your repositories.
-
-## What's in the Cargo Bay?
-
-- **README.MD:** This is a helpful guide!
-- **LICENSE:** Choose the appropriate license for your project.
-- **.gitignore:** Ignore files that shouldn't be tracked in your repository.
-- **.github/workflows:** GitHub Actions for CI/CD.
-- **Dockerfile:** Build your project into a container.
-- **Jupyter Notebook:** A sample notebook to get you started.
-- **docker-compose.yml:** A sample Docker Compose file.
-- **run-ci:** A script to run CI checks locally but with Docker.
-- **run-linter:** A script to run linters locally.
-- **[Optional Folders]:** Examples: `docs/`, `notebooks/`, `src/`, `environments/`, `.github/`, and `.devcontainer/`
-
-## 🚀 3... 2... 1... Liftoff! 🚀
-
-1. **Clone or Create Repository from template:**  Make this repository your own!
-2. **Personalize:** Update the `README.md`, `LICENSE`, etc., with your project details.
-3. **Collaborate:** Invite your team to join the adventure.
-4. **Blast Off!** Start building something incredible!
-
-## 🌌 Repository Stucture 🌌
+The package currently has the following structure:
 
 ```plaintext
-|--- .devcontainer/          # Dev Container settings
-      |--- bash-src
-           |--- aliases
-           |--- functions
-      |--- install
-|--- .github/                # GitHub Actions
-      |--- workflows/
-           |--- ci.yml
-           |--- cd.yml
-           |--- docs.yml
-           |--- guard.yml
-           |--- release-log.yml
-           |--- super-linter.yml
-|--- docs/
-      |--- index.html
-      |--- static/
-           |--- css/
-                |--- site.css
-           |--- js/
-                |--- site.js
-|--- environments/
-      |--- development.env
-      |--- production.env
-      |--- staging.env
-      |--- testing.env
-|--- notebooks/
-      |--- sample.ipynb
-|--- scripts/
-      |--- ci
-            |--- run-ci.sh
-      |--- dev
-            |--- .sleeping_daemon.sh
-|--- src/
-      |--- sample_module.py
-|--- .dockerignore
-|--- .gitignore
-|--- Dockerfile
-|--- LICENSE
-|--- README.md
-|--- docker-compose.yml
-|--- VERSION
+.
+├── .devcontainer/
+├── .github/
+│   └── workflows/
+├── build_docs/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   ├── custom.css
+│   │   │   └── ptcolors-julia-example.png
+│   │   ├── api.md
+│   │   └── index.md
+│   ├── make.jl
+│   ├── Manifest.toml
+│   └── Project.toml
+├── environments/
+├── scripts/
+│   ├── ci/
+│   └── dev/
+├── src/
+│   └── PTColors.jl
+├── test/
+│   ├── runtests.jl
+│   └── test_PTColors.jl
+├── .dockerignore
+├── .gitignore
+├── CHANGELOG.md
+├── docker-compose.yml
+├── Dockerfile
+├── LICENSE
+├── Manifest.toml
+├── Project.toml
+├── README.md
+└── VERSION
 ```
+
+## 🖍️ Example
+
+Load the package:
+
+```julia
+using PTColors
+```
+
+Use the message functions:
+
+```julia
+headermsg("This is a header message.")
+okmsg("This is a success message.")
+warnmsg("This is a warning message.")
+failmsg("This is a failure message.")
+infomsg("This is an information message.")
+```
+
+This produces timestamped terminal messages with a color and label appropriate to each message type.
+
+> **Terminal colors:** PTColors uses standard ANSI color categories rather than
+> fixed RGB values. The exact shades depend on the terminal emulator and its
+> active color theme. This example was captured in the VS Code terminal using
+> the Monokai theme.
+
+![Example terminal output](build_docs/src/assets/ptcolors-julia-example.png)
+
+The package also provides convenience macros:
+
+```julia
+@ptinfo "Simulation started."
+@ptok "Simulation completed."
+@ptwarn "A fallback value is being used."
+@pterror "The simulation failed."
+```
+
+## ⚙️ Running a Callback
+
+The `messages` function prints an information message, runs a callback, and then prints either a success or failure message.
+
+```julia
+# Define the callback that PTColors will run.
+function foo(bar)
+    println("Processing: ", bar)
+end
+
+# Run the callback with start, success, and failure messages.
+status = messages(
+    "Running the foo function...",
+    "foo function complete.",
+    "foo function experienced a problem!",
+    foo,
+    "bar";
+    exception = Exception,
+)
+
+# Interpret the status returned by messages.
+if status == 0
+    println("Hooray!")
+else
+    println("Oh no!")
+end
+```
+
+This produces terminal output similar to the following:
+
+![Callback terminal output](build_docs/src/assets/ptcolors-julia-callback-example.png)
+
+The function returns `0` when the callback succeeds and `1` when it throws an expected exception. Unexpected exceptions are rethrown.
+
+## 🛠️ Main API
+
+| Name         | Purpose                                                |
+| ------------ | ------------------------------------------------------ |
+| `timestamp`  | Return the current date and time as a formatted string |
+| `defaultmsg` | Print a standard timestamped message                   |
+| `headermsg`  | Print a magenta header message                         |
+| `infomsg`    | Print a blue information message                       |
+| `okmsg`      | Print a green success message                          |
+| `warnmsg`    | Print a yellow warning message                         |
+| `failmsg`    | Print a red failure message                            |
+| `messages`   | Run a callback with status and failure handling        |
+| `@ptinfo`    | Print an information message                           |
+| `@ptok`      | Print a success message                                |
+| `@ptwarn`    | Print a warning message                                |
+| `@pterror`   | Print a failure message                                |
+
+## 🧪 Testing
+
+Run the complete test suite from the repository root:
+
+```bash
+julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
+```
+
+## 🚀 Development
+
+Development work is based on the `staging` branch. Create feature branches from `staging` and open pull requests back into `staging`.
+
+## 📄 License
+
+This project is licensed under the [Apache License 2.0](LICENSE).

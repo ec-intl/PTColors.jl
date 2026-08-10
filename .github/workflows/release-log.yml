@@ -3,12 +3,71 @@ name: Release Log
 
 on:
   pull_request:
-    types: [closed]
+    types:
+      - closed
 
 permissions:
   contents: write
 
 jobs:
   logging-tasks:
-    uses: ec-intl/workflow-templates/.github/workflows/release-log_template.yml@v1
-    secrets: inherit
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'staging'
+    runs-on: ubuntu-latest
+
+    env:
+      HEAD: ${{ github.event.pull_request.head.ref }}
+      PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
+
+    steps:
+      - name: Check out release branch
+        uses: actions/checkout@v7
+        with:
+          ref: release
+
+      - name: Write pull request to release log
+        run: |
+          touch release-log.txt
+
+          printf '%s\n' \
+            "- #${PR_NUMBER}: ${PR_TITLE}   (by @${PR_AUTHOR})" \
+            >> release-log.txt
+
+          awk '!seen[$0]++' release-log.txt > release-log.txt.tmp
+          mv release-log.txt.tmp release-log.txt
+          TZ="America/St_Lucia" date > last_updated.txt
+
+          git config user.name "eci-robot"
+          git config user.email "info@ec-intl.com"
+
+          git add release-log.txt last_updated.txt
+
+          if git diff --cached --quiet; then
+            echo "No release-log changes to commit."
+          else
+            git commit -m "Add PR #${PR_NUMBER} to log"
+            git push
+          fi
+
+      - name: Delete merged feature branch
+        run: |
+          protected_branches=(
+            "main"
+            "master"
+            "staging"
+            "production"
+            "release"
+            "gh-pages"
+            "testing"
+          )
+
+          if [[ ! " ${protected_branches[*]} " =~ " ${HEAD} " ]] &&
+             [[ ! "${HEAD}" =~ ^v[0-9]+$ ]]; then
+            git ls-remote --exit-code --heads origin "${HEAD}" \
+              >/dev/null 2>&1 &&
+              git push origin --delete "${HEAD}" ||
+              echo "Branch already deleted or could not be deleted."
+          fi

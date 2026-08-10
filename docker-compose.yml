@@ -21,7 +21,7 @@ services:
         - USERNAME=eci-user
     <<: *testing-common
     volumes:
-      - ~/md-src/template-repository:/template-repository
+      - .:/ptcolors.jl
     profiles:
       - testing
 
@@ -39,7 +39,7 @@ services:
     image: github/super-linter:v5
     <<: *linting-common
     volumes:
-      - ~/md-src/template-repository:/tmp/lint
+      - .:/tmp/lint
     profiles:
       - linting
 
@@ -57,7 +57,7 @@ services:
     build:
       context: .
       args:
-        - USERNAME=${USER}
+        - USERNAME=eci-user
     command:
       - "/bin/bash"
       - "-c"
@@ -68,7 +68,7 @@ services:
     env_file:
       - environments/development.env
     volumes:
-      - ~/.ssh:/home/${USER}/.ssh:ro
-      - ~/md-src/template-repository:/home/${USER}/template-repository
+      - ~/.ssh:/home/eci-user/.ssh:ro
+      - .:/ptcolors.jl
     profiles:
       - developing

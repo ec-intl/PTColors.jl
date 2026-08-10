@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
+
 set -a
-# shellcheck source=./environments/development.env
-. /home/"${USER}"/"${REPONAME}"/environments/development.env
+
+PROJECT_HOME="${PROJECT_HOME:-/ptcolors.jl}"
+
+if [ -f "${PROJECT_HOME}/environments/development.env" ]; then
+    # shellcheck source=/dev/null
+    . "${PROJECT_HOME}/environments/development.env"
+fi
+
 set +a
