@@ -13,10 +13,10 @@
     <a href="https://julialang.org">
         <img alt="Julia 1.11+" src="https://img.shields.io/badge/Julia-1.11%2B-9558B2">
     </a>
-    <a href="https://github.com/ec-intl/ptcolors.jl">
+    <a href="https://github.com/ec-intl/PTColors.jl">
         <img alt="GitHub repository" src="https://img.shields.io/badge/GitHub-PTColors.jl-181717?logo=github">
     </a>
-    <a href="https://github.com/ec-intl/ptcolors.jl/blob/staging/LICENSE">
+    <a href="https://github.com/ec-intl/PTColors.jl/blob/staging/LICENSE">
         <img alt="Apache 2.0 license" src="https://img.shields.io/badge/License-Apache%202.0-4063D8">
     </a>
 </div>
@@ -42,7 +42,7 @@ PTColors makes terminal messages easier to identify without requiring users to w
 ```julia
 using Pkg
 Pkg.add(
-    url = "https://github.com/ec-intl/ptcolors.jl",
+    url = "https://github.com/ec-intl/PTColors.jl",
     rev = "staging",
 )
 ```
@@ -167,8 +167,8 @@ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
 
 > **💡 Explore the package**
 >
-> Review the [API Reference](@ref) for the complete exported interface, or visit the [PTColors.jl GitHub repository](https://github.com/ec-intl/ptcolors.jl) for source code, issues, and development information.
+> Review the [API Reference](@ref) for the complete exported interface, or visit the [PTColors.jl GitHub repository](https://github.com/ec-intl/PTColors.jl) for source code, issues, and development information.
 
 ## License
 
-PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/ptcolors.jl/blob/staging/LICENSE).
+PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/PTColors.jl/blob/staging/LICENSE).
