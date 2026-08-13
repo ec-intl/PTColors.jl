@@ -70,6 +70,7 @@ infomsg("Loading configuration.")
 okmsg("Operation completed successfully.")
 warnmsg("A fallback value is being used.")
 failmsg("The operation failed.")
+defaultmsg("A general status message.")
 ```
 
 Each message includes a timestamp, status label, and corresponding terminal color.
@@ -91,7 +92,7 @@ Each message includes a timestamp, status label, and corresponding terminal colo
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="assets/ptcolors-julia-example.png"
+        src="assets/ptcolors-julia-terminal-example.png"
         alt="Example PTColors terminal output"
         loading="lazy"
     >
