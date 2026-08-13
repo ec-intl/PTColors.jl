@@ -35,19 +35,7 @@ PTColors makes terminal messages easier to identify without requiring users to w
 
 ## Installation
 
-> **ℹ️ Development installation**
->
-> Until PTColors is registered in Julia’s General registry, install it directly from the repository’s `staging` branch.
-
-```julia
-using Pkg
-Pkg.add(
-    url = "https://github.com/ec-intl/PTColors.jl",
-    rev = "staging",
-)
-```
-
-After the package is registered, it can be installed by name:
+Install PTColors from Julia’s General registry:
 
 ```julia
 using Pkg

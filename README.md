@@ -22,14 +22,7 @@ The package provides information, success, warning, failure, and header messages
 
 ## 📦 Installation
 
-While the package is under development, install it from the `staging` branch:
-
-```julia
-using Pkg
-Pkg.add(url = "https://github.com/ec-intl/PTColors.jl", rev = "staging")
-```
-
-After the package is registered in Julia’s General registry, install it by name:
+Install PTColors from Julia’s General registry:
 
 ```julia
 using Pkg
