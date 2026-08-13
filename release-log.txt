@@ -2,3 +2,4 @@
 - #37: chore: improve repository template setup workflow   (by @k-alphonse)
 - #2: feat: create standalone PTColors Julia package   (by @k-alphonse)
 - #4: chore: prepare PTColors.jl v0.1.0 release   (by @k-alphonse)
+- #9: fix: grant TagBot release permissions   (by @k-alphonse)
