@@ -159,4 +159,4 @@ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
 
 ## License
 
-PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/PTColors.jl/blob/staging/LICENSE).
+PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/PTColors.jl/blob/main/LICENSE).
