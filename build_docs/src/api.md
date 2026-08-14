@@ -20,7 +20,11 @@ Modules = [PTColors]
 
 ## Color constants
 
-These constants contain the ANSI escape sequences used to apply and reset terminal colors.
+These constants contain ANSI Select Graphic Rendition (SGR) escape sequences
+that instruct compatible terminals to select bright foreground color
+categories or reset formatting. They do not define fixed RGB values, so the
+exact rendered shades depend on the terminal emulator and its active color
+theme.
 
 ```@docs
 HEADER
