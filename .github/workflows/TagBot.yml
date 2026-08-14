@@ -24,7 +24,13 @@ jobs:
           changelog_format: custom
           changelog: |
             {% macro clean_title(pull) -%}
-            {{ pull.title.split(':', 1)[1] | trim if ':' in pull.title else pull.title }}
+            {% set title = pull.title %}
+            {% set normalized = title | lower %}
+            {% if normalized.startswith('feat:') or normalized.startswith('fix:') or normalized.startswith('docs:') or normalized.startswith('refactor:') or normalized.startswith('ci:') or normalized.startswith('chore:') or normalized.startswith('release:') or normalized.startswith('feat(') or normalized.startswith('fix(') or normalized.startswith('docs(') or normalized.startswith('refactor(') or normalized.startswith('ci(') or normalized.startswith('chore(') or normalized.startswith('release(') %}
+            {{ title.split(':', 1)[1] | trim }}
+            {% else %}
+            {{ title }}
+            {% endif %}
             {%- endmacro %}
 
             {% macro entry(pull) -%}
@@ -141,6 +147,7 @@ jobs:
             {% endif %}
             {% endif %}
 
+            {% if not backport %}
             {% set contributors = namespace(users=[]) %}
             {% for pull in pulls %}
             {% if pull.author.username and pull.author.username not in contributors.users | map(attribute='username') | list %}
@@ -155,6 +162,7 @@ jobs:
             - [@{{ contributor.username }}]({{ contributor.url }})
             {% endfor %}
 
+            {% endif %}
             {% endif %}
             {% if compare_url %}
             ## 🔗 Full Changelog
