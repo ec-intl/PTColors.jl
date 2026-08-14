@@ -73,7 +73,7 @@ failmsg("The operation failed.")
 defaultmsg("A general status message.")
 ```
 
-Each message includes a timestamp, status label, and corresponding terminal color.
+Each message includes a timestamp and status label. The predefined message functions color their labels, while `defaultmsg` is uncolored unless a color is supplied.
 
 | Function | Label | ANSI color | Typical use |
 |---|---|---|---|

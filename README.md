@@ -48,8 +48,6 @@ The package currently has the following structure:
 ├── build_docs/
 │   ├── src/
 │   │   ├── assets/
-│   │   │   ├── custom.css
-│   │   │   └── ptcolors-julia-example.png
 │   │   ├── api.md
 │   │   └── index.md
 │   ├── make.jl
@@ -62,8 +60,6 @@ The package currently has the following structure:
 ├── src/
 │   └── PTColors.jl
 ├── test/
-│   ├── runtests.jl
-│   └── test_PTColors.jl
 ├── .dockerignore
 ├── .gitignore
 ├── CHANGELOG.md
@@ -95,7 +91,7 @@ infomsg("This is an information message.")
 defaultmsg("This is a general message.")
 ```
 
-This produces timestamped terminal messages with a color and label appropriate to each message type.
+This produces timestamped terminal messages with consistent status labels. The predefined message functions color their labels, while `defaultmsg` is uncolored unless a color is supplied.
 
 > **Terminal colors:** PTColors uses standard ANSI color categories rather than
 > fixed RGB values. The exact shades depend on the terminal emulator and its
