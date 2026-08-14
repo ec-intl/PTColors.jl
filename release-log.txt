@@ -3,3 +3,4 @@
 - #2: feat: create standalone PTColors Julia package   (by @k-alphonse)
 - #4: chore: prepare PTColors.jl v0.1.0 release   (by @k-alphonse)
 - #9: fix: grant TagBot release permissions   (by @k-alphonse)
+- #13: ci: customize TagBot release-note formatting   (by @k-alphonse)
