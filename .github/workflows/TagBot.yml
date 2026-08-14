@@ -11,6 +11,9 @@ jobs:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.actor == 'JuliaTagBot'
+    permissions:
+      contents: write
+      issues: write
     runs-on: ubuntu-latest
 
     steps:
@@ -18,4 +21,151 @@ jobs:
         uses: JuliaRegistries/TagBot@cded32665b34ca0496d3ac10a67d08ddfc726963 # v1.25.11
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          changelog_format: conventional
+          changelog_format: custom
+          changelog: |
+            {% macro clean_title(pull) -%}
+            {% set title = pull.title %}
+            {% set normalized = title | lower %}
+            {% if normalized.startswith('feat:') or normalized.startswith('fix:') or normalized.startswith('docs:') or normalized.startswith('refactor:') or normalized.startswith('ci:') or normalized.startswith('chore:') or normalized.startswith('release:') or normalized.startswith('feat(') or normalized.startswith('fix(') or normalized.startswith('docs(') or normalized.startswith('refactor(') or normalized.startswith('ci(') or normalized.startswith('chore(') or normalized.startswith('release(') %}
+            {{ title.split(':', 1)[1] | trim }}
+            {% else %}
+            {{ title }}
+            {% endif %}
+            {%- endmacro %}
+
+            {% macro entry(pull) -%}
+            - [#{{ pull.number }}]({{ pull.url }}): {{ clean_title(pull) }} (by [@{{ pull.author.username }}]({{ pull.author.url }}))
+            {%- endmacro %}
+
+            {% if yanked %}
+            > [!WARNING]
+            > This release has been yanked from the Julia General registry.
+
+            {% endif %}
+            {% if custom %}
+            {{ custom }}
+
+            {% endif %}
+            {% if backport %}
+            > [!NOTE]
+            > This is a backport release. The automated pull-request list is omitted because it may be inaccurate.
+
+            {% else %}
+            {% set features = namespace(items=[]) %}
+            {% set fixes = namespace(items=[]) %}
+            {% set docs = namespace(items=[]) %}
+            {% set refactors = namespace(items=[]) %}
+            {% set ci = namespace(items=[]) %}
+            {% set maintenance = namespace(items=[]) %}
+            {% set releases = namespace(items=[]) %}
+            {% set other = namespace(items=[]) %}
+
+            {% for pull in pulls %}
+            {% set title = pull.title | lower %}
+            {% if title.startswith('feat:') or title.startswith('feat(') %}
+            {% set features.items = features.items + [pull] %}
+            {% elif title.startswith('fix:') or title.startswith('fix(') %}
+            {% set fixes.items = fixes.items + [pull] %}
+            {% elif title.startswith('docs:') or title.startswith('docs(') %}
+            {% set docs.items = docs.items + [pull] %}
+            {% elif title.startswith('refactor:') or title.startswith('refactor(') %}
+            {% set refactors.items = refactors.items + [pull] %}
+            {% elif title.startswith('ci:') or title.startswith('ci(') %}
+            {% set ci.items = ci.items + [pull] %}
+            {% elif title.startswith('chore:') or title.startswith('chore(') %}
+            {% set maintenance.items = maintenance.items + [pull] %}
+            {% elif title.startswith('release:') or title.startswith('release(') %}
+            {% set releases.items = releases.items + [pull] %}
+            {% else %}
+            {% set other.items = other.items + [pull] %}
+            {% endif %}
+            {% endfor %}
+
+            {% if features.items %}
+            ## ✨ Features
+
+            {% for pull in features.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if fixes.items %}
+            ## 🐛 Bug Fixes
+
+            {% for pull in fixes.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if docs.items %}
+            ## 📚 Documentation
+
+            {% for pull in docs.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if refactors.items %}
+            ## ♻️ Code Refactoring
+
+            {% for pull in refactors.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if ci.items %}
+            ## ⚙️ CI & Automation
+
+            {% for pull in ci.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if maintenance.items %}
+            ## 🧹 Maintenance
+
+            {% for pull in maintenance.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if releases.items %}
+            ## ⬆️ Version Updates
+
+            {% for pull in releases.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% if other.items %}
+            ## 🔧 Other Changes
+
+            {% for pull in other.items %}
+            {{ entry(pull) }}
+            {% endfor %}
+
+            {% endif %}
+            {% endif %}
+
+            {% if not backport %}
+            {% set contributors = namespace(users=[]) %}
+            {% for pull in pulls %}
+            {% if pull.author.username and pull.author.username not in contributors.users | map(attribute='username') | list %}
+            {% set contributors.users = contributors.users + [pull.author] %}
+            {% endif %}
+            {% endfor %}
+
+            {% if contributors.users %}
+            ## 👥 Contributors
+
+            {% for contributor in contributors.users %}
+            - [@{{ contributor.username }}]({{ contributor.url }})
+            {% endfor %}
+
+            {% endif %}
+            {% endif %}
+            {% if compare_url %}
+            ## 🔗 Full Changelog
+
+            [Compare {{ previous_release }}...{{ version }}]({{ compare_url }})
+            {% endif %}

@@ -35,19 +35,7 @@ PTColors makes terminal messages easier to identify without requiring users to w
 
 ## Installation
 
-> **ℹ️ Development installation**
->
-> Until PTColors is registered in Julia’s General registry, install it directly from the repository’s `staging` branch.
-
-```julia
-using Pkg
-Pkg.add(
-    url = "https://github.com/ec-intl/PTColors.jl",
-    rev = "staging",
-)
-```
-
-After the package is registered, it can be installed by name:
+Install PTColors from Julia’s General registry:
 
 ```julia
 using Pkg
@@ -70,9 +58,10 @@ infomsg("Loading configuration.")
 okmsg("Operation completed successfully.")
 warnmsg("A fallback value is being used.")
 failmsg("The operation failed.")
+defaultmsg("A general status message.")
 ```
 
-Each message includes a timestamp, status label, and corresponding terminal color.
+Each message includes a timestamp and status label. The predefined message functions color their labels, while `defaultmsg` is uncolored unless a color is supplied.
 
 | Function | Label | ANSI color | Typical use |
 |---|---|---|---|
@@ -91,7 +80,7 @@ Each message includes a timestamp, status label, and corresponding terminal colo
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="assets/ptcolors-julia-example.png"
+        src="assets/ptcolors-julia-terminal-example.png"
         alt="Example PTColors terminal output"
         loading="lazy"
     >
@@ -171,4 +160,4 @@ julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
 
 ## License
 
-PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/PTColors.jl/blob/staging/LICENSE).
+PTColors.jl is available under the [Apache License 2.0](https://github.com/ec-intl/PTColors.jl/blob/main/LICENSE).

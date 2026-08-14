@@ -22,14 +22,7 @@ The package provides information, success, warning, failure, and header messages
 
 ## 📦 Installation
 
-While the package is under development, install it from the `staging` branch:
-
-```julia
-using Pkg
-Pkg.add(url = "https://github.com/ec-intl/PTColors.jl", rev = "staging")
-```
-
-After the package is registered in Julia’s General registry, install it by name:
+Install PTColors from Julia’s General registry:
 
 ```julia
 using Pkg
@@ -48,8 +41,6 @@ The package currently has the following structure:
 ├── build_docs/
 │   ├── src/
 │   │   ├── assets/
-│   │   │   ├── custom.css
-│   │   │   └── ptcolors-julia-example.png
 │   │   ├── api.md
 │   │   └── index.md
 │   ├── make.jl
@@ -62,8 +53,6 @@ The package currently has the following structure:
 ├── src/
 │   └── PTColors.jl
 ├── test/
-│   ├── runtests.jl
-│   └── test_PTColors.jl
 ├── .dockerignore
 ├── .gitignore
 ├── CHANGELOG.md
@@ -92,16 +81,17 @@ okmsg("This is a success message.")
 warnmsg("This is a warning message.")
 failmsg("This is a failure message.")
 infomsg("This is an information message.")
+defaultmsg("This is a general message.")
 ```
 
-This produces timestamped terminal messages with a color and label appropriate to each message type.
+This produces timestamped terminal messages with consistent status labels. The predefined message functions color their labels, while `defaultmsg` is uncolored unless a color is supplied.
 
 > **Terminal colors:** PTColors uses standard ANSI color categories rather than
 > fixed RGB values. The exact shades depend on the terminal emulator and its
 > active color theme. This example was captured in the VS Code terminal using
 > the Monokai theme.
 
-![Example terminal output](build_docs/src/assets/ptcolors-julia-example.png)
+![Example terminal output](build_docs/src/assets/ptcolors-README-example.png)
 
 The package also provides convenience macros:
 
@@ -142,7 +132,7 @@ end
 
 This produces terminal output similar to the following:
 
-![Callback terminal output](build_docs/src/assets/ptcolors-julia-callback-example.png)
+![Callback terminal output](build_docs/src/assets/ptcolors-foo-function-example.png)
 
 The function returns `0` when the callback succeeds and `1` when it throws an expected exception. Unexpected exceptions are rethrown.
 
@@ -152,11 +142,11 @@ The function returns `0` when the callback succeeds and `1` when it throws an ex
 | ------------ | ------------------------------------------------------ |
 | `timestamp`  | Return the current date and time as a formatted string |
 | `defaultmsg` | Print a standard timestamped message                   |
-| `headermsg`  | Print a magenta header message                         |
-| `infomsg`    | Print a blue information message                       |
-| `okmsg`      | Print a green success message                          |
-| `warnmsg`    | Print a yellow warning message                         |
-| `failmsg`    | Print a red failure message                            |
+| `headermsg`  | Print a bright magenta header message                  |
+| `infomsg`    | Print a bright blue information message                |
+| `okmsg`      | Print a bright green success message                   |
+| `warnmsg`    | Print a bright yellow warning message                  |
+| `failmsg`    | Print a bright red failure message                     |
 | `messages`   | Run a callback with status and failure handling        |
 | `@ptinfo`    | Print an information message                           |
 | `@ptok`      | Print a success message                                |

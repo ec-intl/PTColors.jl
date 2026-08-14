@@ -5,11 +5,11 @@ A lightweight Julia module providing color-coded, timestamped terminal messages.
 
 ## Exports
 - `defaultmsg(msg, typ, color)`: Print a timestamped message with an optional ANSI color.
-- `headermsg(msg)`: Print a magenta notice message.
-- `infomsg(msg)`: Print a blue information message.
-- `okmsg(msg)`: Print a green success message.
-- `warnmsg(msg)`: Print a yellow warning message.
-- `failmsg(msg)`: Print a red failure message.
+- `headermsg(msg)`: Print a notice message with a bright magenta status label.
+- `infomsg(msg)`: Print an information message with a bright blue status label.
+- `okmsg(msg)`: Print a success message with a bright green status label.
+- `warnmsg(msg)`: Print a warning message with a bright yellow status label.
+- `failmsg(msg)`: Print a failure message with a bright red status label.
 - `messages(...)`: Run a callback with information, success, and failure messages.
 - `@ptok`, `@ptinfo`, `@ptwarn`, `@pterror`: Convenience macros for colored messages.
 
@@ -23,23 +23,23 @@ export HEADER, INFO, OKGREEN, WARNING, FAIL, ENDC
 export timestamp, defaultmsg, headermsg, failmsg, okmsg, warnmsg, infomsg, messages
 export @ptok, @ptinfo, @ptwarn, @pterror
 
-@doc """HEADER: ANSI magenta color code for header messages.
+@doc """HEADER: ANSI bright magenta foreground code for header messages.
 Example:
     println(HEADER * "Header text" * ENDC)
 """ const HEADER = "\033[95m"
-@doc """INFO: ANSI blue color code for info messages.
+@doc """INFO: ANSI bright blue foreground code for information messages.
 Example:
     println(INFO * "Info text" * ENDC)
 """ const INFO = "\033[94m"
-@doc """OKGREEN: ANSI green color code for success messages.
+@doc """OKGREEN: ANSI bright green foreground code for success messages.
 Example:
     println(OKGREEN * "Success text" * ENDC)
 """ const OKGREEN = "\033[92m"
-@doc """WARNING: ANSI yellow color code for warning messages.
+@doc """WARNING: ANSI bright yellow foreground code for warning messages.
 Example:
     println(WARNING * "Warning text" * ENDC)
 """ const WARNING = "\033[93m"
-@doc """FAIL: ANSI red color code for failure messages.
+@doc """FAIL: ANSI bright red foreground code for failure messages.
 Example:
     println(FAIL * "Failure text" * ENDC)
 """ const FAIL = "\033[91m"
@@ -81,7 +81,7 @@ end
 @doc """
 headermsg(msg; io=stdout)
 
-Print a magenta notice message.
+Print a notice message with a bright magenta status label.
 
 Example:
     headermsg("This is a header message.")
@@ -92,7 +92,7 @@ end
 @doc """
 failmsg(msg; io=stdout)
 
-Print a red failure message.
+Print a failure message with a bright red status label.
 
 Example:
     failmsg("Something failed!")
@@ -103,7 +103,7 @@ end
 @doc """
 okmsg(msg; io=stdout)
 
-Print a green success message.
+Print a success message with a bright green status label.
 
 Example:
     okmsg("Operation succeeded!")
@@ -114,7 +114,7 @@ end
 @doc """
 warnmsg(msg; io=stdout)
 
-Print a yellow warning message.
+Print a warning message with a bright yellow status label.
 
 Example:
     warnmsg("This is a warning.")
@@ -125,7 +125,7 @@ end
 @doc """
 infomsg(msg; io=stdout)
 
-Print a blue information message.
+Print an information message with a bright blue status label.
 
 Example:
     infomsg("This is an info message.")
@@ -175,7 +175,7 @@ Example:
 end
 
 @doc """@ptok msg
-Print a green success message with a timestamp and the given message.
+Print a success message with a timestamp and a bright green status label.
 Example:
     @ptok "Module loaded successfully."
 """ macro ptok(msg)
@@ -183,7 +183,7 @@ Example:
 end
 
 @doc """@ptinfo msg
-Print a blue information message with a timestamp and the given message.
+Print an information message with a timestamp and a bright blue status label.
 Example:
     @ptinfo "Simulation started."
 """ macro ptinfo(msg)
@@ -191,7 +191,7 @@ Example:
 end
 
 @doc """@ptwarn msg
-Print a yellow warning message with a timestamp and the given message.
+Print a warning message with a timestamp and a bright yellow status label.
 Example:
     @ptwarn "Configuration file missing."
 """ macro ptwarn(msg)
@@ -199,7 +199,7 @@ Example:
 end
 
 @doc """@pterror msg
-Print a red failure message with a timestamp and the given message.
+Print a failure message with a timestamp and a bright red status label.
 Example:
     @pterror "Failed to load module."
 """ macro pterror(msg)
