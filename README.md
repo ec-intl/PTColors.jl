@@ -1,6 +1,6 @@
 # 🎨 PTColors.jl
 
-[![Julia 1.11+](https://img.shields.io/badge/Julia-1.11%2B-9558B2?logo=julia)](https://julialang.org)
+[![Julia 1.10+](https://img.shields.io/badge/Julia-1.10%2B-9558B2?logo=julia)](https://julialang.org)
 [![Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-4063D8)](LICENSE)
 
 `PTColors` is a lightweight Julia package designed to add color-coded, timestamped messages to terminal output with minimal effort. It is useful for command-line applications, scripts, simulations, and other projects that need readable status messages.
@@ -18,7 +18,7 @@ The package provides information, success, warning, failure, and header messages
 
 ## 📋 Requirements
 
-- Julia 1.11 or later
+- Julia 1.10 or later
 
 ## 📦 Installation
 

@@ -1,3 +1,4 @@
+ARG JULIA_VERSION=1.11
 FROM github/super-linter:v5 AS ci-linting
 ARG WKDIR=/tmp/lint
 WORKDIR "${WKDIR}"
@@ -5,7 +6,7 @@ RUN mkdir -p "${WKDIR}"
 COPY . "${WKDIR}"
 
 # The official Julia image uses Debian Bookworm Slim and supports AMD64 and ARM64.
-FROM julia:1.11-bookworm AS noninteractive
+FROM julia:${JULIA_VERSION}-bookworm AS noninteractive
 ARG USERNAME
 ARG USER_UID=1066
 ARG USER_GID=${USER_UID}

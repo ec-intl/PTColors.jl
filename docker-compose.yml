@@ -19,6 +19,7 @@ services:
       target: testing
       args:
         - USERNAME=eci-user
+        - JULIA_VERSION=${JULIA_VERSION:-1.11}
     <<: *testing-common
     volumes:
       - .:/ptcolors.jl
@@ -31,6 +32,7 @@ services:
       target: ci-testing
       args:
         - USERNAME=eci-user
+        - JULIA_VERSION=${JULIA_VERSION:-1.11}
     <<: *testing-common
     profiles:
       - ci-testing
