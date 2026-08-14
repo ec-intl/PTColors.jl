@@ -5,3 +5,4 @@
 - #9: fix: grant TagBot release permissions   (by @k-alphonse)
 - #13: ci: customize TagBot release-note formatting   (by @k-alphonse)
 - #14: docs: make General registry installation the default   (by @k-alphonse)
+- #16: docs: align terminal examples and ANSI color descriptions   (by @k-alphonse)
