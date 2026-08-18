@@ -1,7 +1,7 @@
 name = "PTColors"
 uuid = "f54230f2-59b2-4302-b09c-f9f04c8b5500"
 authors = ["Elizabeth Consulting International Inc. <info@ec-intl.com>"]
-version = "1.0.0"
+version = "1.0.1"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
