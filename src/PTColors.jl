@@ -62,14 +62,14 @@ Example:
 end
 
 @doc """
-defaultmsg(msg, typ="  NOTICE  ", color=nothing; io=stdout)
+defaultmsg(msg, typ="  NOTICE   ", color=nothing; io=stdout)
 
 Print a timestamped message. When `color` is supplied, it is applied to the type label.
 
 Example:
     defaultmsg("Hello!", "INFO", INFO)
     defaultmsg("No color label")
-""" function defaultmsg(msg, typ::AbstractString="  NOTICE  ", color=nothing; io::IO=stdout)
+""" function defaultmsg(msg, typ::AbstractString="  NOTICE   ", color=nothing; io::IO=stdout)
     if color === nothing
         println(io, timestamp(), "  [", typ, "]  ", msg)
     else
