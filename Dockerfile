@@ -1,4 +1,4 @@
-ARG JULIA_VERSION=1.11
+ARG JULIA_VERSION=1.10.11
 FROM github/super-linter:v5 AS ci-linting
 ARG WKDIR=/tmp/lint
 WORKDIR "${WKDIR}"

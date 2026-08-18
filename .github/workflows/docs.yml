@@ -17,7 +17,7 @@ permissions:
   checks: read
 
 env:
-  JULIA_VERSION: '1.11'
+  JULIA_VERSION: '1.10'
 
 jobs:
   build-docs:

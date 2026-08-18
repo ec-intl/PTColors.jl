@@ -15,13 +15,6 @@ permissions:
 
 jobs:
   ci-tasks:
-    strategy:
-      fail-fast: false
-      matrix:
-        julia-version:
-          - '1.10.11'
-          - '1.12.6'
-
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -34,17 +27,56 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v7
 
-      - name: Run PTColors tests in Docker
+      - name: Run PTColors tests on Julia 1.10.11
+        id: julia_110
+        continue-on-error: true
         env:
-          JULIA_VERSION: ${{ matrix.julia-version }}
+          JULIA_VERSION: '1.10.11'
         run: |
           docker compose --profile ci-testing up \
             --build \
             --exit-code-from ci-testing
 
-      - name: Clean up Docker resources
+      - name: Clean up Julia 1.10.11 Docker resources
         if: always()
+        env:
+          JULIA_VERSION: '1.10.11'
         run: |
           docker compose --profile ci-testing down \
             --volumes \
             --remove-orphans
+
+      - name: Run PTColors tests on Julia 1.12
+        id: julia_stable
+        if: always()
+        continue-on-error: true
+        env:
+          JULIA_VERSION: '1.12'
+        run: |
+          docker compose --profile ci-testing up \
+            --build \
+            --exit-code-from ci-testing
+
+      - name: Clean up Julia 1.12 Docker resources
+        if: always()
+        env:
+          JULIA_VERSION: '1.12'
+        run: |
+          docker compose --profile ci-testing down \
+            --volumes \
+            --remove-orphans
+
+      - name: Verify supported Julia versions
+        if: always()
+        env:
+          JULIA_110_RESULT: ${{ steps.julia_110.outcome }}
+          JULIA_STABLE_RESULT: ${{ steps.julia_stable.outcome }}
+        run: |
+          echo "Julia 1.10.11 result: $JULIA_110_RESULT"
+          echo "Julia 1.12 result: $JULIA_STABLE_RESULT"
+
+          if [[ "$JULIA_110_RESULT" != "success" ||
+                "$JULIA_STABLE_RESULT" != "success" ]]; then
+            echo "One or more supported Julia versions failed."
+            exit 1
+          fi
