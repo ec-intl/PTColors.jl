@@ -13,7 +13,7 @@ println("\nUnittesting PTColors.jl in ", get(ENV, "PWD", ""), " with Julia ", VE
 @testset "PTColors" begin
     @testset "message formatting" begin
         out = capture_output(io -> PTColors.defaultmsg("plain"; io=io))
-        @test occursin(Regex("^" * TIMESTAMP_PATTERN * "  \\[  NOTICE  \\]  plain\n\$"), out)
+        @test occursin(Regex("^" * TIMESTAMP_PATTERN * "  \\[  NOTICE   \\]  plain\n\$"), out)
 
         out = capture_output(io -> PTColors.okmsg("done"; io=io))
         @test occursin(PTColors.OKGREEN * " [  SUCCESS  ] " * PTColors.ENDC * " done", out)
