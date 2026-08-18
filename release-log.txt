@@ -8,3 +8,4 @@
 - #16: docs: align terminal examples and ANSI color descriptions   (by @k-alphonse)
 - #17: bump: PTColors.jl v1.0.0   (by @k-alphonse)
 - #20: fix: support Julia 1.10 LTS   (by @k-alphonse)
+- #23: fix: align default NOTICE formatting and README output   (by @k-alphonse)
