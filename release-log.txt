@@ -10,3 +10,4 @@
 - #20: fix: support Julia 1.10 LTS   (by @k-alphonse)
 - #23: fix: align default NOTICE formatting and README output   (by @k-alphonse)
 - #24: bump: PTColors.jl v1.0.1   (by @k-alphonse)
+- #27: docs: link Python ptcolors package   (by @k-alphonse)
