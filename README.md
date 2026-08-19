@@ -7,6 +7,10 @@
 
 The package provides information, success, warning, failure, and header messages without requiring users to work directly with ANSI escape codes. It also includes convenience macros and callback handling for common application workflows.
 
+## 🐍 Related Python package
+
+Working in Python? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s Python package for colorized terminal messages. `PTColors.jl` provides similar terminal-message functionality for Julia users, but the packages are maintained separately.
+
 ## 🚦 Project Status
 
 | Workflow                  | Status |

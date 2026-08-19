@@ -24,6 +24,11 @@
 
 PTColors makes terminal messages easier to identify without requiring users to work directly with ANSI escape codes. It provides standard functions, convenience macros, timestamp formatting, and callback status handling.
 
+## Related Python package
+
+Working in Python? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s Python package for colorized terminal messages. `PTColors.jl` provides similar terminal-message functionality for Julia users, but the packages are maintained separately.
+
+
 ## Why PTColors?
 
 - Consistent timestamps and status labels
