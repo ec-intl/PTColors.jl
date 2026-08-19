@@ -7,6 +7,10 @@
 
 The package provides information, success, warning, failure, and header messages without requiring users to work directly with ANSI escape codes. It also includes convenience macros and callback handling for common application workflows.
 
+## 🐍 Python Version
+
+Looking for the Python package? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s related Python package for colorized terminal messages.
+
 ## 🚦 Project Status
 
 | Workflow                  | Status |

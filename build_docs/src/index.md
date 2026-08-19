@@ -24,6 +24,11 @@
 
 PTColors makes terminal messages easier to identify without requiring users to work directly with ANSI escape codes. It provides standard functions, convenience macros, timestamp formatting, and callback status handling.
 
+## Python Version
+
+Looking for the Python package? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s related Python package for colorized terminal messages.
+
+
 ## Why PTColors?
 
 - Consistent timestamps and status labels
