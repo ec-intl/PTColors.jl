@@ -85,7 +85,7 @@ Each message includes a timestamp and status label. The predefined message funct
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="assets/ptcolors-julia-terminal-example.png"
+        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-terminal-example.png"
         alt="Example PTColors terminal output"
         loading="lazy"
     >
@@ -141,7 +141,7 @@ Unexpected exceptions are rethrown so they are not silently hidden.
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="assets/ptcolors-julia-callback-example.png"
+        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-julia-callback-example.png"
         alt="PTColors callback terminal output"
         loading="lazy"
     >
