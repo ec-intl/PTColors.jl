@@ -11,7 +11,7 @@
 
 <div class="ptcolors-badges">
     <a href="https://julialang.org">
-        <img alt="Julia 1.11+" src="https://img.shields.io/badge/Julia-1.11%2B-9558B2">
+        <img alt="Julia 1.10+" src="https://img.shields.io/badge/Julia-1.10%2B-9558B2">
     </a>
     <a href="https://github.com/ec-intl/PTColors.jl">
         <img alt="GitHub repository" src="https://img.shields.io/badge/GitHub-PTColors.jl-181717?logo=github">
@@ -36,7 +36,7 @@ Working in Python? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s 
 - Convenient macros for common message types
 - Callback execution with success and failure handling
 - No external runtime dependencies
-- Support for Julia 1.11 and later
+- Support for Julia 1.10 and later
 
 ## Installation
 
