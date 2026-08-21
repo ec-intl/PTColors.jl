@@ -7,7 +7,8 @@
 
 The package provides information, success, warning, failure, and header messages without requiring users to work directly with ANSI escape codes. It also includes convenience macros and callback handling for common application workflows.
 
-## 🐍 Related Python package
+<!-- markdownlint-disable-next-line MD033 -->
+## <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="" aria-hidden="true" width="24"> Related Python package
 
 Working in Python? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s Python package for colorized terminal messages. `PTColors.jl` provides similar terminal-message functionality for Julia users, but the packages are maintained separately.
 
