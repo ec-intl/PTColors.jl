@@ -96,7 +96,7 @@ This produces timestamped terminal messages with consistent status labels. The p
 > active color theme. This example was captured in the VS Code terminal using
 > the Monokai theme.
 
-![Example terminal output](build_docs/src/assets/ptcolors-README-example.png)
+![Example terminal output](https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-README-example.png)
 
 The package also provides convenience macros:
 
@@ -137,7 +137,7 @@ end
 
 This produces terminal output similar to the following:
 
-![Callback terminal output](build_docs/src/assets/ptcolors-foo-function-example.png)
+![Callback terminal output](https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-foo-function-example.png)
 
 The function returns `0` when the callback succeeds and `1` when it throws an expected exception. Unexpected exceptions are rethrown.
 
