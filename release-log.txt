@@ -14,3 +14,4 @@
 - #31: docs: correct Julia 1.10 support information   (by @k-alphonse)
 - #35: bump: PTColors.jl v1.0.2   (by @k-alphonse)
 - #34: style: use the official Python icon for Python references   (by @k-alphonse)
+- #32: docs: refresh and host terminal images on AWS   (by @k-alphonse)
