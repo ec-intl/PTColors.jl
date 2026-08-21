@@ -13,3 +13,4 @@
 - #27: docs: link Python ptcolors package   (by @k-alphonse)
 - #31: docs: correct Julia 1.10 support information   (by @k-alphonse)
 - #35: bump: PTColors.jl v1.0.2   (by @k-alphonse)
+- #34: style: use the official Python icon for Python references   (by @k-alphonse)
