@@ -11,7 +11,7 @@
 
 <div class="ptcolors-badges">
     <a href="https://julialang.org">
-        <img alt="Julia 1.11+" src="https://img.shields.io/badge/Julia-1.11%2B-9558B2">
+        <img alt="Julia 1.10+" src="https://img.shields.io/badge/Julia-1.10%2B-9558B2">
     </a>
     <a href="https://github.com/ec-intl/PTColors.jl">
         <img alt="GitHub repository" src="https://img.shields.io/badge/GitHub-PTColors.jl-181717?logo=github">
@@ -24,6 +24,12 @@
 
 PTColors makes terminal messages easier to identify without requiring users to work directly with ANSI escape codes. It provides standard functions, convenience macros, timestamp formatting, and callback status handling.
 
+<!-- markdownlint-disable-next-line MD033 -->
+## <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="" aria-hidden="true" width="24"> Related Python package
+
+Working in Python? See [ptcolors](https://github.com/ec-intl/ptcolors), ECI’s Python package for colorized terminal messages. `PTColors.jl` provides similar terminal-message functionality for Julia users, but the packages are maintained separately.
+
+
 ## Why PTColors?
 
 - Consistent timestamps and status labels
@@ -31,7 +37,7 @@ PTColors makes terminal messages easier to identify without requiring users to w
 - Convenient macros for common message types
 - Callback execution with success and failure handling
 - No external runtime dependencies
-- Support for Julia 1.11 and later
+- Support for Julia 1.10 and later
 
 ## Installation
 
@@ -80,7 +86,7 @@ Each message includes a timestamp and status label. The predefined message funct
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="assets/ptcolors-julia-terminal-example.png"
+        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-terminal-example.png"
         alt="Example PTColors terminal output"
         loading="lazy"
     >
@@ -136,7 +142,7 @@ Unexpected exceptions are rethrown so they are not silently hidden.
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="assets/ptcolors-julia-callback-example.png"
+        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-julia-callback-example.png"
         alt="PTColors callback terminal output"
         loading="lazy"
     >
