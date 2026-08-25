@@ -77,3 +77,14 @@ html.theme--documenter-dark .ptcolors-hero {
 html.theme--documenter-dark .ptcolors-example p {
     color: #bbb;
 }
+
+h2[id="Related-Python-package"]::before {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.35em;
+    background: url("https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png")
+        center / contain no-repeat;
+    content: "";
+    vertical-align: -0.12em;
+}
