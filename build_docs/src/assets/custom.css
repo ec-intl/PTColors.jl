@@ -78,7 +78,7 @@ html.theme--documenter-dark .ptcolors-example p {
     color: #bbb;
 }
 
-h2#Related-Python-package::before {
+h2#related-python-package::before {
     display: inline-block;
     width: 1em;
     height: 1em;
