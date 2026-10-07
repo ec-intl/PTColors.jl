@@ -62,19 +62,91 @@ Example:
 end
 
 @doc """
+_format_message(msg, typ, color, time_text)
+
+Build a timestamped message with a padded header and aligned continuation lines.
+Accept a string, a vector of strings, or another printable value.
+""" function _format_message(
+    msg,
+    typ::AbstractString,
+    color,
+    time_text::AbstractString,
+)
+    # 1. Center short labels and preserve longer labels.
+    label = strip(typ)
+    padding = max(0, 11 - textwidth(label))
+    left_padding = padding ÷ 2
+    right_padding = padding - left_padding
+
+    header = string(
+        "[",
+        repeat(" ", left_padding),
+        label,
+        repeat(" ", right_padding),
+        "]",
+    )
+
+    # 2. Convert the message into individual lines.
+    if msg isa AbstractVector{<:AbstractString}
+        message_text = join(msg, "\n")
+    else
+        message_text = string(msg)
+    end
+
+    message_text = replace(message_text, "\r\n" => "\n")
+    message_lines = split(message_text, '\n'; keepempty=true)
+
+    # 3. Measure the prefix before applying color.
+    visible_prefix = string(time_text, "  ", header, "  ")
+    indentation = repeat(" ", textwidth(visible_prefix))
+
+    if color === nothing
+        prefix = visible_prefix
+    else
+        prefix = string(time_text, " ", color, " ", header, " ", ENDC, " ")
+    end
+
+    # 4. Align continuation text while preserving blank lines.
+    formatted_lines = [string(prefix, first(message_lines))]
+
+    for index in 2:length(message_lines)
+        line = message_lines[index]
+
+        if isempty(line)
+            push!(formatted_lines, "")
+        else
+            push!(formatted_lines, string(indentation, line))
+        end
+    end
+
+    return join(formatted_lines, "\n")
+end
+
+@doc """
 defaultmsg(msg, typ="  NOTICE   ", color=nothing; io=stdout)
 
-Print a timestamped message. When `color` is supplied, it is applied to the type label.
+Print a timestamped message with an optional colored header.
 
-Example:
-    defaultmsg("Hello!", "INFO", INFO)
-    defaultmsg("No color label")
-""" function defaultmsg(msg, typ::AbstractString="  NOTICE   ", color=nothing; io::IO=stdout)
-    if color === nothing
-        println(io, timestamp(), "  [", typ, "]  ", msg)
-    else
-        println(io, timestamp(), " ", color, " [", typ, "] ", ENDC, " ", msg)
-    end
+Short labels are centered within 11 visible columns. Longer labels are
+preserved in full. Existing surrounding label padding is normalized.
+
+Accept a string containing line breaks or a vector of message strings.
+Print the timestamp and header once, then align continuation lines beneath
+the first message line. Intentional blank lines are preserved.
+
+When `color` is supplied, it is applied to the header.
+
+Examples:
+    defaultmsg("Hello!", "LOCAL", INFO)
+    defaultmsg(["Calculation completed.", "Results saved locally."])
+""" function defaultmsg(
+    msg,
+    typ::AbstractString="  NOTICE   ",
+    color=nothing;
+    io::IO=stdout,
+)
+    formatted_message = _format_message(msg, typ, color, timestamp())
+    println(io, formatted_message)
     return nothing
 end
 
