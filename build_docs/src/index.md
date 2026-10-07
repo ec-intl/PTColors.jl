@@ -106,6 +106,75 @@ PTColors also provides concise macros for frequently used message types:
 
 These macros call the corresponding message functions and automatically include the timestamp, label, and terminal color.
 
+## Custom headers and multiline messages
+
+`defaultmsg` accepts a custom header through its second argument and an
+optional ANSI color through its third argument. The formatter adds automatic
+header padding and aligns messages containing multiple lines.
+
+```julia
+using PTColors
+
+defaultmsg(
+    "Sending the workload.\nUsing the selected configuration.",
+    "LOCAL",
+    INFO,
+)
+
+defaultmsg(
+    ["Calculation running.", "Waiting for results."],
+    "REMOTE CONTROLLER",
+    INFO,
+)
+
+lines = [
+    "Calculation completed.",
+    "Results saved locally.",
+    "Temporary machine removed.",
+]
+
+okmsg(lines)
+```
+
+This produces the following terminal output:
+
+```@raw html
+<div class="ptcolors-example">
+    <img
+        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-julia-formatter-example.png"
+        alt="Custom headers and aligned multiline terminal messages"
+        loading="lazy"
+    >
+    <p>Continuation lines align beneath their own message text.</p>
+</div>
+```
+
+Headers are centered within a minimum of 11 terminal columns, matching
+`INFORMATION`. Existing surrounding header padding is normalized.
+
+Longer headers are displayed in full. Their message text starts farther to
+the right, and their continuation lines follow that position. Use labels
+that fit within 11 columns when you want messages to share the standard
+text column.
+
+All message functions accept strings containing line breaks or vectors of
+strings. Each call prints one timestamp and header. Vector items become
+separate lines; line breaks within items and intentional blank lines are
+preserved.
+
+For example, an empty string adds a blank line:
+
+```julia
+okmsg(["Calculation completed.", "", "Results saved locally."])
+```
+
+Line breaks are supplied explicitly through `\n` or vector items. PTColors
+does not automatically wrap messages to the terminal width.
+
+`INFO` selects the existing bright-blue header color. Omitting the color
+argument keeps `defaultmsg` uncolored. Standard message functions retain
+their established colors.
+
 ## Callback handling
 
 The `messages` function prints an information message, runs a callback, and then reports whether the callback succeeded or failed.
