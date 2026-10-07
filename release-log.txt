@@ -19,3 +19,4 @@
 - #39: docs: fix Python package heading rendering   (by @k-alphonse)
 - #41: bump: PTColors.jl v1.0.3   (by @k-alphonse)
 - #42: chore: reconcile main and staging release history   (by @k-alphonse)
+- #47: feat: format custom headers and multiline messages   (by @k-alphonse)
