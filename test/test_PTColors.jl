@@ -344,11 +344,16 @@ println("\nUnittesting PTColors.jl in ", get(ENV, "PWD", ""), " with Julia ", VE
         @test endswith(out, "beta\n")
         @test !occursin('┐', out)
 
-        out = capture_layout(
-            io -> PTColors.defaultmsg(["a\tb", "done"], "LOCAL"; io=io);
-            columns=80,
-        )
-        @test out == local_prefix * "a\tb\n" * indentation * "done\n"
+        for columns in (nothing, 80)
+            for control in ("\t", "\r", "\b", "\e[2J", "\x7f")
+                message = "a" * control * "b"
+                out = capture_layout(
+                    io -> PTColors.defaultmsg([message, "done"], "LOCAL"; io=io);
+                    columns=columns,
+                )
+                @test out == local_prefix * message * "\n" * indentation * "done\n"
+            end
+        end
 
         # 6. Keep single lines, unconstrained streams, and trailing blank rows.
         long_line = repeat("x", 100)

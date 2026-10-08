@@ -226,7 +226,15 @@ Accept a string, a vector of strings, or another printable value.
         return string(prefix, first(message_lines))
     end
 
-    # 5. Reserve seven guide columns and one spare terminal column.
+    # 5. Validate controls and reserve space for the grouping guide.
+    for line in message_lines
+        plain = replace(line, r"\e\[[0-9;:]*m" => "")
+        if occursin(r"[\x00-\x1f\x7f]", plain)
+            return string(prefix, join(message_lines, "\n" * indentation))
+        end
+    end
+
+    # Reserve seven guide columns and one spare terminal column.
     if columns !== nothing
         message_width = columns - prefix_width - 8
         wrapped_lines = String[]
