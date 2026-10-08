@@ -110,42 +110,53 @@ These macros call the corresponding message functions and automatically include 
 
 `defaultmsg` accepts a custom header through its second argument and an
 optional ANSI color through its third argument. The formatter adds automatic
-header padding and aligns messages containing multiple lines.
+header padding, aligns continuation lines, and visually groups multiline
+messages.
 
 ```julia
 using PTColors
 
 defaultmsg(
-    "Sending the workload.\nUsing the selected configuration.",
+    [
+        "Sending the workload.",
+        "Using the selected configuration.",
+        "Input files checked.",
+        "Waiting for results.",
+    ],
     "LOCAL",
     INFO,
 )
 
 defaultmsg(
-    ["Calculation running.", "Waiting for results."],
+    "Calculation running.\nWaiting for results.",
     "REMOTE CONTROLLER",
     INFO,
 )
 
-lines = [
+okmsg([
     "Calculation completed.",
     "Results saved locally.",
     "Temporary machine removed.",
-]
+])
 
-okmsg(lines)
+defaultmsg(
+    ["No color was supplied.", "The guide uses the terminal foreground."],
+    "PLAIN",
+)
+
+infomsg("Single-line output remains unchanged.")
 ```
 
-This produces the following terminal output:
+Example terminal output:
 
 ```@raw html
 <div class="ptcolors-example">
     <img
-        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-julia-formatter-example.png"
-        alt="Custom headers and aligned multiline terminal messages"
+        src="https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-julia-multiline-grouping-example.png"
+        alt="Custom headers and grouped multiline terminal messages"
         loading="lazy"
     >
-    <p>Continuation lines align beneath their own message text.</p>
+    <p>Each multiline group uses a right-hand bracket matching its header.</p>
 </div>
 ```
 
@@ -159,21 +170,57 @@ text column.
 
 All message functions accept strings containing line breaks or vectors of
 strings. Each call prints one timestamp and header. Vector items become
-separate lines; line breaks within items and intentional blank lines are
-preserved.
+separate lines, and line breaks within items are retained.
 
-For example, an empty string adds a blank line:
+Multiline messages use dashed connections after the first and last lines,
+joined by a solid right-hand bracket. Intermediate lines have only the
+vertical marker. Each group positions its right edge beyond its longest
+visible message line, so separate groups may end at different columns.
+Single-line messages retain their existing layout without a grouping guide.
+
+An empty string adds a blank message row. The grouping guide remains
+visible on that row:
 
 ```julia
 okmsg(["Calculation completed.", "", "Results saved locally."])
 ```
 
-Line breaks are supplied explicitly through `\n` or vector items. PTColors
-does not automatically wrap messages to the terminal width.
+The header and grouping guide use the same supplied ANSI color.
+`INFO` selects the existing bright-blue color. Omitting the color argument
+keeps `defaultmsg` uncolored, using the terminal's normal foreground.
+Standard message functions retain their established colors.
 
-`INFO` selects the existing bright-blue header color. Omitting the color
-argument keeps `defaultmsg` uncolored. Standard message functions retain
-their established colors.
+Multiline output sent directly to a terminal wraps to its current width
+before the grouping guide is added. The formatter reserves space for the
+actual timestamp and header, the guide, and one spare terminal column.
+It breaks at spaces where possible, replacing the separating space with a
+line break. Long words are split without separating Unicode grapheme
+clusters, such as a letter and its combining accent. Explicit line breaks
+and blank rows are retained. ANSI color and style sequences do not count
+as visible columns and remain intact across wrapped rows.
+
+Files, pipes, and ordinary buffers keep their supplied line breaks. To
+request a specific output width, pass an `IOContext` through the existing
+`io` keyword:
+
+```julia
+output = IOContext(stdout, :displaysize => (24, 70))
+defaultmsg(
+    ["This longer message wraps within the requested output width.", "Done."],
+    "LOCAL",
+    INFO;
+    io=output,
+)
+```
+
+> **Narrow terminals:** If the header leaves too little room for the guide
+> and message, PTColors omits the guide and preserves the supplied text.
+> The same fallback applies if a complete Unicode grapheme cannot fit, or
+> if the message contains tabs or control sequences other than ANSI color
+> and style codes. The terminal may still wrap this fallback output.
+> Single-line calls retain their existing layout. Width is checked when
+> printing; resizing the terminal afterward does not reformat earlier
+> messages.
 
 ## Callback handling
 
