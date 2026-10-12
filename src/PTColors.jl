@@ -134,7 +134,8 @@ Return `nothing` when a cluster cannot fit or unsupported controls are present.
         if last_index == length(tokens)
             push!(wrapped_lines, join(tokens[first_index:last_index]))
             break
-        elseif last_space > first_index
+        elseif last_space > first_index &&
+               sum(@view widths[first_index:(last_space - 1)]) > 0
             push!(wrapped_lines, join(tokens[first_index:(last_space - 1)]))
             first_index = last_space + 1
         else
