@@ -21,3 +21,4 @@
 - #42: chore: reconcile main and staging release history   (by @k-alphonse)
 - #47: feat: format custom headers and multiline messages   (by @k-alphonse)
 - #49: feat: add multiline grouping and terminal-aware wrapping   (by @k-alphonse)
+- #52: bump: PTColors.jl v1.1.0   (by @k-alphonse)
