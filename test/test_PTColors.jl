@@ -320,6 +320,42 @@ println("\nUnittesting PTColors.jl in ", get(ENV, "PWD", ""), " with Julia ", VE
         )
         @test occursin(indentation * "\e[31msecond\e[0m ", raw)
 
+        @testset "styled leading spaces" begin
+            @test PTColors._wrap_message_line(" abcdef", 4) == [" abc", "def"]
+
+            expected = string(
+                local_prefix, " abc ─ ─ ─┐\n",
+                indentation, "def", repeat(" ", 7), "│\n",
+                indentation, "done ─ ─ ─┘\n",
+            )
+
+            for style in ("\e[31m", "\e[1m\e[31m")
+                styled = style * " abcdef\e[0m"
+                @test PTColors._wrap_message_line(styled, 4) ==
+                    [style * " abc", "def\e[0m"]
+                @test PTColors._wrap_message_line("word " * styled, 4) ==
+                    ["word", style * " abc", "def\e[0m"]
+
+                for color in (nothing, PTColors.INFO)
+                    out = capture_layout(
+                        io -> PTColors.defaultmsg([styled, "done"], "LOCAL", color; io=io);
+                        columns=48,
+                    )
+                    @test out == expected
+
+                    raw = capture_output(
+                        io -> PTColors.defaultmsg([styled, "done"], "LOCAL", color; io=io);
+                        columns=48,
+                    )
+                    guide_color = color === nothing ? "" : color
+                    @test occursin(
+                        style * " abc\e[0m " * guide_color * "─ ─ ─┐", raw,
+                    )
+                    @test occursin(indentation * style * "def\e[0m ", raw)
+                end
+            end
+        end
+
         # 5. Fall back without truncation when a guide cannot fit safely.
         for columns in (0, 20, 44)
             out = capture_layout(
