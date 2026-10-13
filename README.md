@@ -107,6 +107,113 @@ The package also provides convenience macros:
 @pterror "The simulation failed."
 ```
 
+## 📝 Custom headers and multiline messages
+
+`defaultmsg` accepts a custom header through its second argument and an
+optional ANSI color through its third argument. The formatter adds automatic
+header padding, aligns continuation lines, and visually groups multiline
+messages.
+
+```julia
+using PTColors
+
+defaultmsg(
+    [
+        "Sending the workload.",
+        "Using the selected configuration.",
+        "Input files checked.",
+        "Waiting for results.",
+    ],
+    "LOCAL",
+    INFO,
+)
+
+defaultmsg(
+    "Calculation running.\nWaiting for results.",
+    "REMOTE CONTROLLER",
+    INFO,
+)
+
+okmsg([
+    "Calculation completed.",
+    "Results saved locally.",
+    "Temporary machine removed.",
+])
+
+defaultmsg(
+    ["No color was supplied.", "The guide uses the terminal foreground."],
+    "PLAIN",
+)
+
+infomsg("Single-line output remains unchanged.")
+```
+
+Example terminal output:
+
+![Custom headers and grouped multiline terminal messages](https://ec-intl-assets.s3.us-east-1.amazonaws.com/PTColors/assets/ptcolors-julia-multiline-grouping-example.png)
+
+Headers are centered within a minimum of 11 terminal columns, matching
+`INFORMATION`. Existing surrounding header padding is normalized.
+
+Longer headers are displayed in full. Their message text starts farther to
+the right, and their continuation lines follow that position. Use labels
+that fit within 11 columns when you want messages to share the standard
+text column.
+
+All message functions accept strings containing line breaks or vectors of
+strings. Each call prints one timestamp and header. Vector items become
+separate lines, and line breaks within items are retained.
+
+Multiline messages use dashed connections after the first and last lines,
+joined by a solid right-hand bracket. Intermediate lines have only the
+vertical marker. Each group positions its right edge beyond its longest
+visible message line, so separate groups may end at different columns.
+Single-line messages retain their existing layout without a grouping guide.
+
+An empty string adds a blank message row. The grouping guide remains
+visible on that row:
+
+```julia
+okmsg(["Calculation completed.", "", "Results saved locally."])
+```
+
+The header and grouping guide use the same supplied ANSI color.
+`INFO` selects the existing bright-blue color. Omitting the color argument
+keeps `defaultmsg` uncolored, using the terminal's normal foreground.
+Standard message functions retain their established colors.
+
+Multiline output sent directly to a terminal wraps to its current width
+before the grouping guide is added. The formatter reserves space for the
+actual timestamp and header, the guide, and one spare terminal column.
+It breaks at spaces where possible, replacing the separating space with a
+line break. Long words are split without separating Unicode grapheme
+clusters, such as a letter and its combining accent. Explicit line breaks
+and blank rows are retained. ANSI color and style sequences do not count
+as visible columns and remain intact across wrapped rows.
+
+Files, pipes, and ordinary buffers keep their supplied line breaks. To
+request a specific output width, pass an `IOContext` through the existing
+`io` keyword:
+
+```julia
+output = IOContext(stdout, :displaysize => (24, 70))
+defaultmsg(
+    ["This longer message wraps within the requested output width.", "Done."],
+    "LOCAL",
+    INFO;
+    io=output,
+)
+```
+
+> **Narrow terminals:** If the header leaves too little room for the guide
+> and message, PTColors omits the guide and preserves the supplied text.
+> The same fallback applies if a complete Unicode grapheme cannot fit, or
+> if the message contains tabs or control sequences other than ANSI color
+> and style codes. The terminal may still wrap this fallback output.
+> Single-line calls retain their existing layout. Width is checked when
+> printing; resizing the terminal afterward does not reformat earlier
+> messages.
+
 ## ⚙️ Running a Callback
 
 The `messages` function prints an information message, runs a callback, and then prints either a success or failure message.
